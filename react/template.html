@@ -24,7 +24,7 @@
 
       var Fib = React.createClass({
 
-        //need to store the current number and previous one in the sequence
+        //need to store the current number and previous number in the sequence
         getInitialState() {
           return {
             current: 1,
@@ -60,6 +60,7 @@
         }
         });
 
+
       //
       // Carousel
       //
@@ -68,7 +69,6 @@
 
         getInitialState() {
           return {
-            images: ['../images/Stark.png','../images/Lannister.png','../images/Baratheon.png','../images/Targaryen.png'],
             index: 0,
             title: 'Carousel'
           };
@@ -77,20 +77,20 @@
         //go to the next slide
         //use modulo to keep index in range of images arr
         // ex. index = 3
-        // (index+1)%4 -> 0 index
+        // (index+1)%4 -> index 0
         next() {
           this.setState((prevState) =>{
-            return {index: (prevState.index+1) % this.state.images.length}
+            return {index: (prevState.index+1) % this.props.images.length}
           });
         },
 
         //go to the previous slide
         //use modulo to keep index in range of images arr
         // ex. index = 0
-        // ((index-1)+4)%4 -> 3 index
+        // ((index-1)+4)%4 -> index 3
         previous() {
           this.setState((prevState) =>{
-            return {index: ((prevState.index-1) + this.state.images.length) % this.state.images.length}
+            return {index: ((prevState.index-1) + this.props.images.length) % this.props.images.length}
           });
         },
 
@@ -99,11 +99,10 @@
             <div>
               <h1 className="app-title">{ this.state.title }</h1>
 
-              <img src={this.state.images[this.state.index]} alt="No Image" />
-
-              <div className="app-counter-buttons">
-                <button type="button" name="previous" onClick={this.previous}>Previous</button>
-                <button type="button" name="next" onClick={this.next}>Next</button>
+              <div className="carousel-wrapper">
+                <img src={this.props.images[this.state.index]} alt="No Image" />
+                <button className="arrow-btn previous" type="button" name="previous" onClick={this.previous}>{`<`}</button>
+                <button className="arrow-btn next" type="button" name="next" onClick={this.next}>{`>`}</button>
               </div>
 
             </div>
@@ -111,10 +110,14 @@
         }
         });
 
+      //image store
+      //carousel takes in images as props
+      const images = ['../images/Stark.png','../images/Lannister.png','../images/Baratheon.png','../images/Targaryen.png']
+
       ReactDOM.render(
         <div>
           <Fib />
-          <Carousel />
+          <Carousel images={images}/>
         </div>, document.getElementById('app'));
 
     </script>

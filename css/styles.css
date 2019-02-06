@@ -29,3 +29,26 @@ body {
   background-color: #008CBA;
   color: white;
 }
+
+.carousel-wrapper{
+  position: relative;
+}
+
+.arrow-btn{
+  font-size: 40px;
+  position: absolute;
+  top:50%;
+  width: 50px;
+  height: 80px;
+  background: none;
+  color: #DAA520;
+  border-color: #DAA520;
+}
+
+.previous{
+  left: 20%;
+}
+
+.next{
+  right: 20%;
+}
