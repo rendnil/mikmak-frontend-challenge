@@ -60,9 +60,61 @@
         }
         });
 
+      //
+      // Carousel
+      //
+
+      var Carousel = React.createClass({
+
+        getInitialState() {
+          return {
+            images: ['../images/Stark.png','../images/Lannister.png','../images/Baratheon.png','../images/Targaryen.png'],
+            index: 0,
+            title: 'Carousel'
+          };
+        },
+
+        //go to the next slide
+        //use modulo to keep index in range of images arr
+        // ex. index = 3
+        // (index+1)%4 -> 0 index
+        next() {
+          this.setState((prevState) =>{
+            return {index: (prevState.index+1) % this.state.images.length}
+          });
+        },
+
+        //go to the previous slide
+        //use modulo to keep index in range of images arr
+        // ex. index = 0
+        // ((index-1)+4)%4 -> 3 index
+        previous() {
+          this.setState((prevState) =>{
+            return {index: ((prevState.index-1) + this.state.images.length) % this.state.images.length}
+          });
+        },
+
+        render() {
+          return (
+            <div>
+              <h1 className="app-title">{ this.state.title }</h1>
+
+              <img src={this.state.images[this.state.index]} alt="No Image" />
+
+              <div className="app-counter-buttons">
+                <button type="button" name="previous" onClick={this.previous}>Previous</button>
+                <button type="button" name="next" onClick={this.next}>Next</button>
+              </div>
+
+            </div>
+          );
+        }
+        });
+
       ReactDOM.render(
         <div>
           <Fib />
+          <Carousel />
         </div>, document.getElementById('app'));
 
     </script>
