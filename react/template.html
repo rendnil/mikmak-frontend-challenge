@@ -17,85 +17,55 @@
     <div id="app"></div>
 
     <script type="text/babel">
-        var Counter = React.createClass({
-          getInitialState() {
+
+      //
+      // Fibonacci Counter
+      //
+
+      var Fib = React.createClass({
+
+        //need to store the current number and previous one in the sequence
+        getInitialState() {
+          return {
+            current: 1,
+            previous: 1,
+            title: 'Fibonacci Counter'
+          };
+        },
+
+        // in fib, next number = current + previous
+        // update the previous number after computing the next one
+        increment() {
+          this.setState((prevState) =>{
             return {
-              count: 0,
-              title: 'React Counter'
-            };
-          },
-          increment() {
-            this.setState({count: this.state.count + 1});
-          },
-          decrement() {
-            if (this.state.count > 0) this.setState({count: this.state.count - 1});
-          },
-          render() {
-            return (
-              <div>
-                <h1 className="app-title">{ this.state.title }</h1>
-                <div className="app-current-count">
-                  { this.state.count }
-                </div>
-                <div className="app-counter-buttons">
-                  <button type="button" name="decrement" onClick={this.decrement}>-</button>
-                  <button type="button" name="increment" onClick={this.increment}>+</button>
-                </div>
-              </div>
-            );
-          }
+              current: prevState.current + prevState.previous,
+              previous: prevState.current
+            }
           });
+        },
 
-        //
-        // Fibonacci Counter
-        //
-
-        var Fib = React.createClass({
-
-          //need to store the current number and previous one in the sequence
-          getInitialState() {
-            return {
-              current: 1,
-              previous: 1,
-              title: 'Fib Counter'
-            };
-          },
-
-          // in fib, next number = current + previous
-          // update the previous number after computing the next one
-          increment() {
-            this.setState((prevState) =>{
-              return {
-                current: prevState.current + prevState.previous,
-                previous: prevState.current
-              }
-            });
-          },
-
-          //existing code
-          render() {
-            return (
-              <div>
-                <h1 className="app-title">{ this.state.title }</h1>
-                <div className="app-current-count">
-                  { this.state.current }
-                </div>
-                <div className="app-counter-buttons">
-
-                  <button id="fib-button" type="button" name="increment" onClick={this.increment}>Next</button>
-                </div>
-              </div>
-            );
-          }
-          });
-
-          ReactDOM.render(
+        //existing code
+        render() {
+          return (
             <div>
-              <Counter />
-              <Fib />
-            </div>, document.getElementById('app'));
+              <h1 className="app-title">{ this.state.title }</h1>
+              <div className="app-current-count">
+                { this.state.current }
+              </div>
+              <div className="app-counter-buttons">
+                <button type="button" name="increment" onClick={this.increment}>Next</button>
+              </div>
+            </div>
+          );
+        }
+        });
 
-        </script>
+      ReactDOM.render(
+        <div>
+          <Fib />
+        </div>, document.getElementById('app'));
+
+    </script>
 
   </body>
 </html>
